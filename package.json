@@ -1,1 +1,22 @@
-
+{
+  "name": "d.js-eris",
+  "version": "0.8.5",
+  "description": "A framework that basically turns (most of the) eris methods into discord.js methods",
+  "main": "index.js",
+  "dependencies": {
+    "eris": "github:abalabahaha/eris"
+  },
+  "author": "MoordMachineYT#1910",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoordMachineYT/d.js-eris.git"
+  },
+  "bugs": {
+    "url": "https://github,com/MoordMachineYT/d.js-eris/issues"
+  },
+  "homepage": "https://github.com/MoordMachineYT/d.js-eris#readme",
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
