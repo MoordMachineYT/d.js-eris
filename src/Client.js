@@ -42,7 +42,7 @@ class Client extends EventEmitter {
     if (!this.eris) {
       this.options = Util.erisify(this.options);
       this.eris = new eris(this.token, this.options);
-      this.eris.on("rawWS", this.packetmanager.packet.bind(this));
+      this.eris.on("rawWS", this.packetmanager.packet.bind(this.packetmanager));
     }
     this.eris.connect();
   }
