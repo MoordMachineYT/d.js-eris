@@ -2,7 +2,7 @@ var EventEmitter = require("events").EventEmitter;
 const Util = require("./Util/Util.js");
 const pm = require("./Packetmanager.js");
 try {
-  EventEmitter = require("eventemitter16");
+  EventEmitter = require("eventemitter16"); // My own event emitter
 } catch(err) {
   try {
     EventEmitter = require("eventemitter3");
@@ -47,3 +47,5 @@ class Client extends EventEmitter {
     this.eris.connect();
   }
 }
+
+module.exports = Client;
