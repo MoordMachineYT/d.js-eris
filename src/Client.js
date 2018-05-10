@@ -29,9 +29,13 @@ class Client extends EventEmitter{
   }
   login(token) {
     if (this.eris && this.eris.ready) throw new Error("Already logged in");
-    if (!token) Promise.reject(new Error("No token given"));
+    if (!token && !this.token) Promise.reject(new Error("No token given"));
+    this.token = token;
     if (!this.eris) {
-      
+      this.options = Util.erisify(this.options);
+      this.eris = new eris(this.token, this.options);
+      this.eris.on("rawWS", () => {});
     }
+    this.eris.connect();
   }
 }
