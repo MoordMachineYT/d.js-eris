@@ -1,11 +1,17 @@
 var EventEmitter = require("events").EventEmitter;
 const Util = require("./Util/Util.js");
+const pm = require("./Packetmanager.js");
 try {
   EventEmitter = require("eventemitter16");
-} catch(err) {}
+} catch(err) {
+  try {
+    EventEmitter = require("eventemitter3");
+  } catch(err) {}
+}
+
 const eris = require("eris");
 
-class Client extends EventEmitter{
+class Client extends EventEmitter {
   constructor(options) {
     super();
     this.options = {
@@ -26,6 +32,8 @@ class Client extends EventEmitter{
     if (typeof options === "object") {
       for (var i of Object.keys(options)) this.options[i] = options[i];
     }
+    
+    this.packetmanager = new pm();
   }
   login(token) {
     if (this.eris && this.eris.ready) throw new Error("Already logged in");
@@ -34,7 +42,7 @@ class Client extends EventEmitter{
     if (!this.eris) {
       this.options = Util.erisify(this.options);
       this.eris = new eris(this.token, this.options);
-      this.eris.on("rawWS", () => {});
+      this.eris.on("rawWS", this.packetmanager.packet.bind(this));
     }
     this.eris.connect();
   }
